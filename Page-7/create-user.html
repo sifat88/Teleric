@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <title>Build Your Plan</title>
+
+
+
+</head>
+<body>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="create-user">
+                        <p>Let's create your Teleric ID <span>Your Teleric ID lets you securely sign in to your account with your verified email address or mobile phone number. Use your ID to track your order, pay bills, activate your services, and more.</span></p>
+                        <div class="user-form">
+                            <div class="form-header">
+                                <p>Service Address</p>
+                                <p>1662 ISHNALA DR 201, NAPERVILLE, IL 60565</p>
+                            </div>
+                            <div class="form-content">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="firstname">First name</label>
+                                            <input type="text" class="form-control" placeholder="First name" id="firstname">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="lastname">Last name</label>
+                                            <input type="text" class="form-control" placeholder="Last name" id="lastname">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="form-group col-md-6">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-5">
+                                                <label for="inputNumber">Select type</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>Work</option>
+                                                    <option>Home</option>
+                                                    <option>Mobile</option>
+                                                </select>
+                                              </div>
+                                              <div class="form-group col-md-7">
+                                                <label for="inputNumber">Phone number</label>
+                                                <input type="number" class="form-control" id="inputNumber">
+                                              </div>
+                                        </div>
+                                      </div>
+                                      <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Email</label>
+                                        <input type="email" class="form-control" id="inputEmail4">
+                                      </div>
+                                    </div>
+                                    <div class="toggle-form">
+                                        <p>Paperless Billing</p>
+                                        <div class="cmn-switchbox">
+                                            <input type="checkbox" name="" id="cmnSwitch2" class="cmn-switch" checked>
+                                            <label for="cmnSwitch2">
+                                                <span class="cmn-switch-dot"></span>
+                                            </label>
+                                            <p>I want to go paperless!<br>Email me when my bill is available online.</p>
+                                        </div>
+                                      </div>
+                                  </form>
+                            </div>
+                        </div>
+                        <div class="auto-pay-block">
+                            <p>Set up automatic payments <br><a href="#">Or, pay your bill manually each month</a> </p>
+                            <div class="auto-pay-content">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="apc-list">
+                                            <p>Pay on time, every time with automatic payments:</p>
+                                            <ul>
+                                                <li>No credit check or Social Security number needed</li>
+                                                <li>Opt out anytime</li>
+                                                <li>Backed by our 30-day-money-back guarantee</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="due-card-block">
+                                            <div class="due-card">
+                                                <div class="dc-head">
+                                                    Due today
+                                                </div>
+                                                <div class="dc-body">
+                                                    <p>Automatic Pre-Payment</p>
+                                                    <div class="due-amount">$50.00</div>
+                                                    <p>toward your monthly plan</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="apc-footer">
+                                <span>Today's pre-payment will be applied to your first bill after installation. Your credit/debit card will be charged $50.00 once you submit your order. If services are not installed, you'll be refunded $50.00.</span>
+                            </div>
+                            <div class="card-form">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="firstname">Cardholder's First name</label>
+                                            <input type="text" class="form-control" placeholder="First name" id="firstname">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="lastname">Cardholder's Last name</label>
+                                            <input type="text" class="form-control" placeholder="Last name" id="lastname">
+                                        </div>
+                                    </div>
+                                        <div class="form-group cc-card-logos">
+                                          <label for="inputCity">Card Number</label>
+                                          <input type="text" class="form-control" id="inputCity">
+                                          <ul class="cc-logos">
+                                            <li class="cc-card visa"></li>
+                                            <li class="cc-card mastercard"></li>
+                                            <li class="cc-card amex"></li>
+                                            <li class="cc-card discover"></li>
+                                         </ul>
+                                        </div>
+                                    <div class="form-row">
+                                      <div class="form-group col-md-6">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Expiration Date</label>
+                                                <select id="inputMonth" class="form-control">
+                                                    <option selected>Month</option>
+                                                    <option value="01">01</option>
+                                                    <option value="02">02</option>
+                                                    <option value="03">03</option>
+                                                    <option value="04">04</option>
+                                                    <option value="05">05</option>
+                                                    <option value="06">06</option>
+                                                    <option value="07">07</option>
+                                                    <option value="08">08</option>
+                                                    <option value="09">09</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>   
+                                                </select>
+                                              </div>
+                                              <div class="form-group col-md-6">
+                                                <label class="zer-opa">:</label>
+                                                <select id="inputYear" class="form-control">
+                                                    <option selected>Year</option>
+                                                    <option value="2020">2020</option>
+                                                    <option value="2021">2021</option>
+                                                    <option value="2022">2022</option>
+                                                    <option value="2023">2023</option>
+                                                    <option value="2024">2024</option>
+                                                    <option value="2025">2025</option>
+                                                    <option value="2026">2026</option>
+                                                    <option value="2027">2027</option>
+                                                    <option value="2028">2028</option>
+                                                    <option value="2029">2029</option>
+                                                    <option value="2030">2030</option>
+                                                    <option value="2031">2031</option>
+                                                </select>
+                                              </div>
+                                        </div>
+                                      </div>
+                                      <div class="form-group col-md-4 .ver-relative">
+                                        <label for="inputCCVNum">CVV Number</label>
+                                        <input type="number" class="form-control" id="inputCCVNum">
+                                        <div class="versign"></div>
+                                      </div>
+                                    </div>
+                                  </form>
+                                  <div class="addrs-tg">
+                                    <div class="cmn-checkbox">
+                                        <input type="checkbox" name="Billing" id="biladdrs" class="checkbox-input">
+                                        <label for="biladdrs">Billing address is different from service address</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="addrs-form" id="addrsform">
+                                <form>
+                                    <div class="form-row">
+                                      <div class="form-group col-md-9">
+                                        <label for="inputEmail4">Billing Address</label>
+                                        <input type="text" class="form-control" id="inputEmail4">
+                                      </div>
+                                      <div class="form-group col-md-3">
+                                        <label for="inputEmail4">Apt</label>
+                                        <input type="email" class="form-control" id="inputEmail4">
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="form-group col-md-6">
+                                        <label for="inputCity">City</label>
+                                        <input type="text" class="form-control" id="inputCity">
+                                      </div>
+                                      <div class="form-group col-md-3">
+                                        <label for="inputState">State</label>
+                                        <select id="inputState" class="form-control">
+                                          <option selected>Select</option>
+                                          <option value="AL">AL</option>
+                                        <option value="AK">AK</option>
+                                        <option value="AZ">AZ</option>
+                                        <option value="AR">AR</option>
+                                        <option value="CA">CA</option>
+                                        <option value="CO">CO</option>
+                                        <option value="CT">CT</option>
+                                        <option value="DC">DC</option>
+                                        <option value="DE">DE</option>
+                                        <option value="FL">FL</option>
+                                        <option value="GA">GA</option>
+                                        <option value="HI">HI</option>
+                                        <option value="ID">ID</option>
+                                        <option value="IL">IL</option>
+                                        <option value="IN">IN</option>
+                                        <option value="IA">IA</option>
+                                        <option value="KS">KS</option>
+                                        <option value="KY">KY</option>
+                                        <option value="LA">LA</option>
+                                        <option value="ME">ME</option>
+                                        <option value="MD">MD</option>
+                                        <option value="MA">MA</option>
+                                        <option value="MI">MI</option>
+                                        <option value="MN">MN</option>
+                                        <option value="MS">MS</option>
+                                        <option value="MO">MO</option>
+                                        <option value="MT">MT</option>
+                                        <option value="NE">NE</option>
+                                        <option value="NV">NV</option>
+                                        <option value="NH">NH</option>
+                                        <option value="NJ">NJ</option>
+                                        <option value="NM">NM</option>
+                                        <option value="NY">NY</option>
+                                        <option value="NC">NC</option>
+                                        <option value="ND">ND</option>
+                                        <option value="OH">OH</option>
+                                        <option value="OK">OK</option>
+                                        <option value="OR">OR</option>
+                                        <option value="PA">PA</option>
+                                        <option value="RI">RI</option>
+                                        <option value="SC">SC</option>
+                                        <option value="SD">SD</option>
+                                        <option value="TN">TN</option>
+                                        <option value="TX">TX</option>
+                                        <option value="UT">UT</option>
+                                        <option value="VT">VT</option>
+                                        <option value="VA">VA</option>
+                                        <option value="WA">WA</option>
+                                        <option value="WV">WV</option>
+                                        <option value="WI">WI</option>
+                                        <option value="WY">WY</option>
+                                        </select>
+                                      </div>
+                                      <div class="form-group col-md-3">
+                                        <label for="inputZip">ZIP Code</label>
+                                        <input type="text" class="form-control" id="inputZip">
+                                      </div>
+                                    </div>
+                                  </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-4">
+                <div class="plan-confirmation">
+                    <div class="pc-head">
+                        <div class="pc-head-sec1">
+                            <div class="plan-tag">internet</div>
+                            <a href="#">change plan</a>
+                        </div>
+                        <div class="pc-head-sec2">
+                            <div class="pc-name">Performance</div>
+                            <div class="pc-price">$35.00/mo</div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="pc-body">
+                        <p><b>Monthly Plan</b></p>
+                          <div class="pc-list">
+                            <ul>
+                                <li>
+                                    <div class="pc-name-price">
+                                        <div class="pc-name">Internet/Voice Equipment Rental</div>
+                                        <div class="pc-price">$14.00/mo</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="pc-name-price">
+                                        <div class="pc-name">Flex Streaming TV Box Rental</div>
+                                        <div class="pc-price">$00.00/mo</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="pc-name-price">
+                                        <div class="pc-name">Teleric Flex Service</div>
+                                        <div class="pc-price">$00.00/mo</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="pc-footer">
+                        <div class="pc-footer-total">
+                            <p>monthly total</p>
+                            <p><span>$</span>0.00</p>
+                        </div>
+                        <div class="cmn-footer-cta">
+                            <a href="../Page-6/install-plan.html"><button type="button" class="btn">Previous</button></a>
+                            <a href="#"><button type="button" class="btn blue-btn">Next</button></a>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+        
+    </main>
+    <!-- jQuery and JS bundle w/ Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <script src="assets/js/main.js"></script>
+</body>
+</html>
