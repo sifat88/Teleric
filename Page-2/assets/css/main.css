@@ -962,12 +962,18 @@
   .cmn-border{
       border: 3px solid #0272b6 !important;
   }
-  @media only screen and (min-width: 1600px){
+  @media only screen and (min-width: 2100px){
       .plan-summary {
           right: 700px;
       }
   }
-  
+  @media only screen and (min-width: 1600px) and (max-width: 2099px)  {
+    .plan-summary {
+        right: 200px;
+    }
+    
+  }
+
   @media only screen and (min-width: 1281px) and (max-width: 1440px)  {
       .plan-summary {
           right: 170px;
