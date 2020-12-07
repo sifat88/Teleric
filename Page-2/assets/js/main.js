@@ -3,12 +3,21 @@
 // Plan Builder
 ////////////////////////////////////
 
+const netTAG = document.getElementById("netTag");
+const tvTAG = document.getElementById("tvTag");
+const hmeTAG = document.getElementById("homeTag");
+const vceTAG = document.getElementById("voiceTag");
+
+
 const taSwch = document.getElementById("taSwitch");
 const pccTxtNET = document.getElementById("PccNETText");
 const pccNETPrc = document.getElementById("pccNETPrice");
 
 const pccTxtTV = document.getElementById("PccTVText");
 const pccTVPrc = document.getElementById("pccTVPrice");
+
+const pccTxtHme = document.getElementById("PccHmeText");
+const pccPrcHme = document.getElementById("pccHmePrice");
 
 const pccTxtVCE = document.getElementById("PccVCEText");
 const pccPrcVCE = document.getElementById("PccVCEprice");
@@ -24,15 +33,21 @@ const tp1 = document.getElementById("TVplan1");
 const tp2 = document.getElementById("TVplan2");
 const tp3 = document.getElementById("TVplan3");
 
+const hp1 = document.getElementById("hmeplan1");
+const hp2 = document.getElementById("hmeplan2");
+const hp3 = document.getElementById("hmeplan3");
+
 const vp1 = document.getElementById("VoicePlan1");
 
 
 const sglPlanNet = document.querySelectorAll("div.sglp-net");
 const sglPlanTV = document.querySelectorAll("div.sglp-Tv");
+const sglPlanHme = document.querySelectorAll("div.sglp-home");
 const sglPlanVoice = document.querySelectorAll("div.sglp-voice");
 
 const pcclitemNet = document.querySelector("li.pccl-net");
 const pcclitemTV = document.querySelector("li.pccl-Tv");
+const pcclitemHme = document.querySelector("li.pccl-home");
 const pcclItemVoice = document.querySelector("li.pccl-voice");
 
 
@@ -51,6 +66,7 @@ sglPlanNet.forEach(sprm => {
         PCart.classList.remove("d-none");
         dscTxt.classList.remove("d-none");
         pcclitemNet.classList.remove("d-none");
+        netTAG.classList.remove("d-none");
         if(sprm === np2) {
             pccTxtNET.innerHTML = "Internet: Performance, 500 Mbps";
             pccNETPrc.innerHTML = "$75.00";
@@ -84,6 +100,7 @@ sglPlanTV.forEach(TVprm => {
         PCart.classList.remove("d-none");
         dscTxt.classList.remove("d-none");
         pcclitemTV.classList.remove("d-none");
+        tvTAG.classList.remove("d-none");
         if(TVprm === tp1) {
             pccTxtTV.innerHTML = "Tv: Basic, 10+ Channels";
             pccTVPrc.innerHTML = "$50.00";
@@ -97,6 +114,29 @@ sglPlanTV.forEach(TVprm => {
     })
 })
 
+sglPlanHme.forEach(Hmeprm => {
+    Hmeprm.addEventListener("click" , ()=> {
+        sglPlanHme.forEach(HmeVprm => {
+            HmeVprm.classList.remove("cmn-border");
+        });
+        Hmeprm.classList.toggle("cmn-border");
+        pbp.classList.add("d-none");
+        PCart.classList.remove("d-none");
+        dscTxt.classList.remove("d-none");
+        pcclitemHme.classList.remove("d-none");
+        hmeTAG.classList.remove("d-none");
+        if(Hmeprm === hp1) {
+            pccTxtHme.innerHTML = "Home: Basic, 3+ Features";
+            pccPrcHme.innerHTML = "$50.00";
+        } else if(Hmeprm === hp2) {
+            pccTxtHme.innerHTML = "Home: Extra, 5+ Features";
+            pccPrcHme.innerHTML = "$70.00";
+        } else if(Hmeprm === hp3) {
+            pccTxtHme.innerHTML = "Home: Prefered, 10+ Features";
+            pccPrcHme.innerHTML = "$90.00";
+        } 
+    })
+})
 
 sglPlanVoice.forEach(VCEprm => {
     VCEprm.addEventListener("click" , ()=> {
@@ -108,6 +148,7 @@ sglPlanVoice.forEach(VCEprm => {
         PCart.classList.remove("d-none");
         dscTxt.classList.remove("d-none");
         pcclItemVoice.classList.remove("d-none");
+        vceTAG.classList.remove("d-none");
         if(VCEprm === vp1) {
             pccTxtVCE.innerHTML = "Teleric voice";
             pccPrcVCE.innerHTML = "$35.00";
@@ -118,18 +159,23 @@ sglPlanVoice.forEach(VCEprm => {
 
 const netDEL = document.getElementById("netDel");
 const tvDEL = document.getElementById("tvDel");
+const hmeDEL = document.getElementById("hmeDel");
 const vceDEL = document.getElementById("voiceDel");
 
-const delFunc = (delPrm, delItem, delitemLIst) => {
+const delFunc = (delPrm, delItem, delitemLIst, delTag) => {
     delPrm.addEventListener("click" , () => {
         delItem.classList.add("d-none");
+        delTag.classList.add("d-none");
         delitemLIst.forEach(prm => {
             prm.classList.remove("cmn-border");
         });
     })
 }
 
-delFunc(netDEL, pcclitemNet , sglPlanNet); delFunc(tvDEL, pcclitemTV, sglPlanTV); delFunc(vceDEL, pcclItemVoice, sglPlanVoice);
+delFunc(netDEL, pcclitemNet , sglPlanNet, netTAG); 
+delFunc(tvDEL, pcclitemTV, sglPlanTV, tvTAG); 
+delFunc(hmeDEL, pcclitemHme, sglPlanHme, hmeTAG); 
+delFunc(vceDEL, pcclItemVoice, sglPlanVoice, vceTAG);
 
 window.addEventListener("click" , () => {
     if( taSwch.checked === true) {
