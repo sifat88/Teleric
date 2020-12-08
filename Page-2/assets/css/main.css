@@ -177,7 +177,7 @@
       margin-bottom: 45px;
   }
   /* ======= Plan Summary ====== */
-  .plan-summary {
+  .plan-summary, .plan-confirmation {
       position: fixed;
       right: 200px;
       top: 110px;
@@ -962,20 +962,14 @@
   .cmn-border{
       border: 3px solid #0272b6 !important;
   }
-  @media only screen and (min-width: 2100px){
-      .plan-summary {
+  @media only screen and (min-width: 1600px){
+      .plan-summary,.plan-confirmation {
           right: 700px;
       }
   }
-  @media only screen and (min-width: 1600px) and (max-width: 2099px)  {
-    .plan-summary {
-        right: 200px;
-    }
-    
-  }
-
+  
   @media only screen and (min-width: 1281px) and (max-width: 1440px)  {
-      .plan-summary {
+      .plan-summary, .plan-confirmation {
           right: 170px;
       }
       
@@ -983,7 +977,7 @@
     
     
     @media (min-width: 1023px) and (max-width: 1280px) {
-      .plan-summary {
+      .plan-summary, .plan-confirmation {
           right: 5px;
       }
       .pc-footer .cmn-footer-cta .btn {
@@ -994,7 +988,7 @@
   
     
     @media (min-width: 768px) and (max-width: 1023px) {
-      .plan-summary {
+      .plan-summary , .plan-confirmation{
           position: static;
           right: auto;
           top: auto;
@@ -1035,7 +1029,7 @@
           text-align: left;
           padding-left: 50px;
       }
-      .plan-summary {
+      .plan-summary,.plan-confirmation {
           position: static;
           right: auto;
           top: auto;
