@@ -182,6 +182,7 @@
       right: 200px;
       top: 110px;
       width: 350px;
+      transition: linear 0.3s;
   }
   .ps-head {
       background: #0171b6;

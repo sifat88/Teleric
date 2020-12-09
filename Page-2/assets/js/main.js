@@ -194,3 +194,17 @@ delBtn.forEach( delPrm => {
         } 
     })
 });
+
+
+const lastScrollTop = 400;
+const plnSmry = document.getElementById("psmry");
+window.addEventListener("scroll", function(){ 
+   var st = window.pageYOffset || document.documentElement.scrollTop;
+   if (st > lastScrollTop){
+      plnSmry.style.top = "auto";
+      plnSmry.style.bottom = "50px";
+   } else {
+    plnSmry.style.top = "245px";
+    plnSmry.style.bottom = "auto";
+   }
+}, false);
