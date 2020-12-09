@@ -962,6 +962,21 @@
   .cmn-border{
       border: 3px solid #0272b6 !important;
   }
+  @media only screen and (min-width: 3840px){
+    .plan-summary, .plan-confirmation{
+        right: 35%;
+    }
+  }
+  @media only screen and (min-width: 2560px){
+    .plan-summary, .plan-confirmation{
+        right: 27%;
+    }
+  }
+  @media only screen and (min-width: 2048px){
+    .plan-summary, .plan-confirmation{
+        right: 22%;
+    }
+  }
   @media only screen and (min-width: 1920px){
     .plan-summary, .plan-confirmation {
         width: 370px;
@@ -974,14 +989,13 @@
 }
   @media only screen and (min-width: 1600px) and (max-width: 1919px){
     .plan-summary,.plan-confirmation {
-        right: 300px;
+        right: 255px;
+        top: 245px;
+    }
+    .plan-confirmation {
+        top: 208px;
     }
 }
-  @media only screen and (min-width: 1600px) and (max-width: 1919px){
-      .plan-summary,.plan-confirmation {
-          right: 200px;
-      }
-  }
   
   @media only screen and (min-width: 1281px) and (max-width: 1440px)  {
       .plan-summary, .plan-confirmation {
