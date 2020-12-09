@@ -1,0 +1,8 @@
+_satellite.pushAsyncScript(function(event, target, $variables){
+  var TCpixelimgSrc="https://comcast.inq.com/chatskins/launch/inqChatLaunch312.js";
+var TCpixelimg = document.createElement('script');
+    TCpixelimg.src = TCpixelimgSrc;
+    document.body.appendChild(TCpixelimg);
+
+_satellite.notify('DTM:Touch Commerce JS Tag');
+});

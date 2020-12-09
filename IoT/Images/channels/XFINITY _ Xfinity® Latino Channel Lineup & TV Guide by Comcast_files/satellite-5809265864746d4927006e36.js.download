@@ -1,0 +1,8 @@
+_satellite.pushAsyncScript(function(event, target, $variables){
+  var ADDpixelimgSrc="https://js.dmtry.com/channel.js#gid:3867;advid:977;pid:739845";
+var ADDpixelimg = document.createElement('script');
+    ADDpixelimg.src = ADDpixelimgSrc;
+    document.body.appendChild(ADDpixelimg);
+
+_satellite.notify('DTM: Adometry Conversion Tag - Landing Page - Desktop');
+});

@@ -1,0 +1,19 @@
+//<script>
+bouncex.state = {"newvid":false,"iol":true,"tn":1516122878,"pvid":3,"rc":false,"mobile":false,"vip":"124.123.22.210","geo":{"country_code":"IN","country_code3":"IND","country_name":"India","region":"02","city":"Hyderabad","postal_code":"500070","latitude":17.3753,"longitude":78.4744,"area_code":null,"dma_code":null,"metro_code":null,"continent_code":"AS","zip":"500070","country":"IN","region_name":"Andhra Pradesh"}};
+bouncex.cookie = {"sid":5,"fvt":1514737217,"vid":1516122672864490,"ao":0,"lp":"https%3A%2F%2Fwww.xfinity.com%2Flearn%2Fchannel-lineup-latino%2F","as":0,"vpv":3,"d":"d","r":"www.xfinity.com","cvt":1516122672,"gcr":56,"m":0,"did":"847405142837166322","lvt":1516122878,"v":{"cart":false,"package_options_selected":false,"logged_in_event_fired":false}};
+bouncex.brandStyles = false;
+bouncex.webfonts = false;
+bouncex.campaigns = false;
+bouncex.gbi.stacks = false;
+bouncex.debug = false;
+
+
+bouncex.tryCatch(function(){
+	if(bouncex.browser.msie){
+		bouncex.setTimeout2(function(){
+			bouncex.init();
+		}, 0);
+	} else {
+		bouncex.init();
+	}
+})();

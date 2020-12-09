@@ -1,0 +1,536 @@
+// from MotionPoint
+var MP = {
+  Version: '1.0.23',
+  Domains: {'es':'es.comcast.com'},
+  SrcLang: 'en',
+  UrlLang: 'mp_js_current_lang',
+  SrcUrl: decodeURIComponent('mp_js_orgin_url'),
+
+  init: function(){
+    if (MP.UrlLang.indexOf('p_js_')==1) {
+      MP.SrcUrl=window.top.document.location.href;
+      MP.UrlLang=MP.SrcLang;
+    }
+  },
+
+  getCookie: function(name){
+    var start=document.cookie.indexOf(name+'=');
+    if(start < 0) return null;
+    start=start+name.length+1;
+    var end=document.cookie.indexOf(';', start);
+    if(end < 0) end=document.cookie.length;
+    while (document.cookie.charAt(start)==' '){ start++; }
+    return decodeURIComponent(document.cookie.substring(start,end));
+  },
+
+  setCookie: function(name,value,path,domain){
+    var cookie=name+'='+encodeURIComponent(value);
+    if(path)cookie+='; path='+path;
+    if(domain)cookie+='; domain='+domain;
+    var now=new Date();
+    now.setTime(now.getTime()+1000*60*60*24*365);
+    cookie+='; expires='+now.toUTCString();
+    document.cookie=cookie;
+  },
+
+  switchLanguage: function(lang){
+    if(lang!=MP.SrcLang){
+      var script=document.createElement('SCRIPT');
+      script.src=location.protocol+'//'+MP.Domains[lang]+'/'+MP.SrcLang+lang+'/?1023749632;'+encodeURIComponent(MP.SrcUrl);
+  	document.body.appendChild(script);
+    } else if(lang==MP.SrcLang && MP.UrlLang!=MP.SrcLang){
+      var script=document.createElement('SCRIPT');
+      script.src=location.protocol+'//'+MP.Domains[MP.UrlLang]+'/'+MP.SrcLang+MP.UrlLang+'/?1023749634;'+encodeURIComponent(location.href);
+  	document.body.appendChild(script);
+    }
+    return false;
+  },
+
+  switchToLang: function(url) {
+    window.top.location.href=url;
+  }
+
+};
+
+
+jQuery(function() {
+    'use strict';
+
+    var fn = {
+        init: function() {
+            // automate conversion of classes to selectors to remove duplication of code
+            $.each(this.selectors = $.extend({}, this.classes), function(key, value) {
+                fn.selectors[key] = "." + value;
+            });
+
+            this.createPolyfills();
+            this.bindListeners();
+        },
+
+        keyboard: {
+            ctrl: 17,
+            tab: 9,
+            enter: 13,
+            esc: 27,
+            space: 32,
+            left: 37,
+            up: 38,
+            right: 39,
+            down: 40,
+            back: 8,
+            del: 46
+        },
+
+        classes: {
+            item: 'polaris-item',
+            dropdown: 'polaris-dropdown',
+            dropdownOpen: 'polaris-is-open',
+            dropdownBtn: 'polaris-dropdown-btn',
+            dropdownBtnOpen: 'polaris-dropdown-btn-open',
+            submenu: 'polaris-submenu',
+            submenuOpen: 'polaris-submenu-open',
+            hasSubmenuOpen: 'polaris-has-submenu-open',
+            submenuBackBtn: 'polaris-submenu-back',
+            navigation: 'polaris-nav-header-wrapper',
+            icon: 'polaris-icon',
+            mobileMenu: 'polaris-menu-mobile',
+            subDropDown: 'polaris-subDrop',
+            linkItem: 'polaris-link',
+            allFirstUniverseItems: 'polarisSub-content--universe > .polaris-navigation > .polaris-item',
+            subIsOpen: '_open',
+            searchBox: 'input[data-link-info="Search"]',
+            searchButton: '.polarisSub-search-btn',
+            transEndEvents: 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend webkitAnimationEnd oanimationend msAnimationEnd animationend'
+        },
+
+        cartPreviousSession: false,
+        cartPreviousSessionApi: null,
+
+        createPolyfills: function() {
+            // Function.bind does not exist in IE8 or phantomJS
+            if (!Function.prototype.bind) {
+                Function.prototype.bind = function(oThis) {
+                    if (typeof this !== 'function') {
+                        // closest thing possible to the ECMAScript 5
+                        // internal IsCallable function
+                        throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+                    }
+
+                    var aArgs = Array.prototype.slice.call(arguments, 1),
+                        fToBind = this,
+                        fNOP = function() {
+                        },
+                        fBound = function() {
+                            return fToBind.apply(this instanceof fNOP
+                                    ? this
+                                    : oThis,
+                                aArgs.concat(Array.prototype.slice.call(arguments)));
+                        };
+
+                    if (this.prototype) {
+                        // native functions don't have a prototype
+                        fNOP.prototype = this.prototype;
+                    }
+                    fBound.prototype = new fNOP();
+
+                    return fBound;
+                };
+            }
+        },
+
+        handleClicks: function(ev) {
+          var $element = $(ev.target),
+              $currentItem = $element.closest(this.selectors.item),
+              isCurrentOpen = $currentItem.hasClass(this.classes.dropdownOpen),
+              $dropdownBtn = $element.closest(this.selectors.dropdownBtn);
+
+          if (!$element.closest(this.selectors.dropdown).length) {
+              // clicked outside dropdown so close any open dropdowns
+              this.closeDropDown($(this.selectors.dropdownOpen));// close all open dropdowns
+          }
+
+          if ($element.closest(this.selectors.submenuBackBtn).length) {
+              // inside of a sub navigation and they clicked on the back button to close the submenu
+              var $deepestOpenSubMenu = $(this.selectors.submenuOpen).last();
+              this.closeSubmenu($deepestOpenSubMenu);
+          } else if ($dropdownBtn.next(this.selectors.submenu).length) {
+              this.openSubmenu($dropdownBtn);
+              return;
+          }
+
+          if (!isCurrentOpen && $dropdownBtn.length) {
+              // clicked on dropdown link and it's not open
+              this.openDropdown($dropdownBtn.next(this.selectors.dropdown), $dropdownBtn);
+          }
+        },
+
+        handleKeydown: function(ev) {
+            var $element = $(ev.target),
+                $dropdown = $element.closest(this.selectors.dropdown),
+                $subDropdown = $element.closest(this.selectors.subDropDown),
+                $submenu = $element.closest(this.selectors.submenu),
+                $firstItem = this.$focusables($dropdown).first(),
+                $lastItem = this.$focusables($dropdown).last(),
+                $polarisSub = $('.polarisSub-content');
+
+            switch (ev.keyCode) {
+                case this.keyboard.esc:
+                    this.closeDropDown($dropdown.closest(this.selectors.dropdownOpen));
+                    this.closeSubDropdown();
+
+                    break;
+                case this.keyboard.tab:
+                    // return if not in dropdown
+                    if (!$dropdown.length) {
+                        break;
+                    }
+
+                    if ($element.is($firstItem) && ev.shiftKey) {
+                        if ($polarisSub.length) {
+                            this.closeSubDropdown();
+                        } else {
+                            this.closeDropDown($dropdown.closest(this.selectors.dropdownOpen));
+                        }
+                    }
+
+                    if ($element.is($lastItem) && ev.shiftKey) {
+                        return;
+                    }
+
+                    if ($element.is($lastItem)) {
+                        if ($polarisSub.length) {
+                            this.closeSubDropdown();
+                        } else {
+                            this.closeDropDown($dropdown.closest(this.selectors.dropdownOpen));
+                        }
+                    }
+                    break;
+                case this.keyboard.right:
+                    if ($dropdown.length) {
+                        this.handleClicks(ev);
+                    }
+                    break;
+                case this.keyboard.left:
+                    if ($submenu.length) {
+                        this.closeSubmenu($submenu);// close sub nav
+                    }
+                    break;
+                case this.keyboard.down:
+                    if ($dropdown.length) {
+                        ev.preventDefault();
+                        this.focusNext(ev);
+                    } else {
+                        this.handleClicks(ev);
+                    }
+                    break;
+                case this.keyboard.up:
+                    if ($dropdown.length) {
+                        ev.preventDefault();
+                        this.focusPrev(ev);
+                    } else {
+                        this.handleClicks(ev);
+                    }
+                    break;
+            }
+        },
+
+        getCloseIconName: function($icon) {
+            return 'polaris-icon-' + $icon.data('icon-name') + '-close';
+        },
+
+        openSubmenu: function($button) {
+            var $parentMenu = $button.closest('.polaris-menu'),
+                $currentSubMenu = $button.next(this.selectors.dropdown);
+
+            this.showSubmenu($currentSubMenu);
+            this.hideSubmenu($parentMenu);
+        },
+
+        closeSubmenu: function($menu) {
+            var $thisButton = $('#' + $menu.attr('aria-describedby'));
+            var $parentMenu = $thisButton.closest('.polaris-menu');
+            var isTopSubmenu = !$parentMenu.hasClass(this.classes.submenu);
+
+            this.hideSubmenu($menu);
+            this.showSubmenu($parentMenu);
+
+            $thisButton.focus();
+
+            if (isTopSubmenu){
+                $('#polaris-menu-mobile').removeClass(this.classes.hasSubmenuOpen);
+            }
+        },
+
+        closeAllSubmenus: function() {
+            var $deepestOpenSubMenu = $(this.selectors.submenuOpen + this.selectors.submenu).last();
+
+            if ($deepestOpenSubMenu.length) {
+                this.closeSubmenu($deepestOpenSubMenu);
+                this.closeAllSubmenus();
+            }
+        },
+
+        hideSubmenu: function($subMenu) {
+            var $thisButton = $('#' + $subMenu.attr('aria-describedby'));
+            $thisButton.after($subMenu);
+
+            $subMenu.addClass('polaris-is-hidden').removeClass(this.classes.submenuOpen).attr('aria-hidden', "true");
+        },
+
+        showSubmenu: function($menu) {
+            var $topMenu = $menu.closest('.polaris-menu-mobile');
+            $topMenu.addClass(this.classes.hasSubmenuOpen);
+            $topMenu.prepend($menu);
+
+            $menu.removeClass('polaris-is-hidden').addClass(this.classes.submenuOpen).attr('aria-hidden', "false");
+            this.$focusables($menu).first().focus();
+        },
+
+        // open/close - consolidate - lots of duplicate code
+        toggleDropDown: function(){
+
+        },
+
+        openDropdown: function($dropdown, $button) {
+            $dropdown.attr('aria-hidden', 'false').closest(this.selectors.item).addClass(this.classes.dropdownOpen);
+
+            var $icon = $button.children(this.selectors.icon);
+            $icon.addClass(this.getCloseIconName($icon));
+
+            $button.attr('aria-expanded', 'true');
+            $button.addClass(this.classes.dropdownBtnOpen);
+            $button.closest('.polaris-nav-header-wrapper').addClass('_mobileNavOpen');
+
+            this.$focusables($dropdown).first().focus();
+        },
+
+        closeDropDown: function($items) {
+            this.closeAllSubmenus();
+            $items.removeClass(this.classes.dropdownOpen).children(this.selectors.dropdown).attr('aria-hidden', 'true');
+
+            var $button = $items.children(this.selectors.dropdownBtn),
+                $icon = $button.children(this.selectors.icon);
+            $icon.removeClass(this.getCloseIconName($icon));
+
+            $button.attr('aria-expanded', 'false');
+            $button.removeClass(this.classes.dropdownBtnOpen);
+            $button.closest('.polaris-nav-header-wrapper').removeClass('_mobileNavOpen');
+            $button.focus();
+        },
+
+        // TODO - scroll on focus even when the item is already in view?
+        focus: function(ev, isForward){
+
+            var $el = $(ev.target),
+                $dropdown = $el.closest(this.selectors.dropdown),
+                $list = this.$focusables($dropdown),
+                $lastItem = $list[isForward ? 'last': 'first'](),
+                preE = jQuery.Event( "polaris-pre-focus" );
+
+            $el.trigger(preE, {
+                component: this,
+                origEv: ev,
+                isForward: isForward,
+                $dropdown: $dropdown,
+                $list: $list,
+                $lastItem: $lastItem
+            });
+
+            if (preE.isDefaultPrevented()){
+                return;
+            }
+
+            if ($el.is($lastItem)) {
+                $list[isForward ? 'first' : 'last']().focus();
+            } else {
+                var index = $list.index($el);
+                $list.eq(index + (isForward ? 1 : -1)).focus();
+            }
+        },
+
+        focusNext: function(ev) {
+            this.focus(ev, true);
+        },
+
+        focusPrev: function(ev) {
+            this.focus(ev);
+        },
+
+        $focusables: function($el) {
+            var focusableSelector = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
+            var $element = $el ? $el : $(this.selectors.navigation);
+            return $element.find(focusableSelector).filter(':visible');
+        },
+
+        handleSearch: function(ev) {
+          if (ev.type === 'click') {
+            var $element = $(ev.target).closest('.polarisSub-search').find('input');
+            window.location = "/search#q=" + $element.val();
+            return;
+          } else {
+            var $element = $(ev.target);
+            switch (ev.keyCode) {
+                case this.keyboard.enter:
+                    window.location = "/search#q=" + $element.val();
+                    break;
+            }
+          }
+        },
+
+        openSubDropdown: function(ev) {
+            var $targ = $(ev.target),
+                $li = $targ.closest(this.selectors.subDropDown),
+                $dropdown = $li.find(this.selectors.dropdown);
+            if ($li.hasClass(this.classes.subIsOpen)) {
+                $li.removeClass(this.classes.subIsOpen);
+                this.closeSubDropdown();
+            } else {
+                this.closeSubDropdown();
+                $li.addClass(this.classes.subIsOpen);
+                $dropdown.attr('aria-hidden','false');
+                $li.children(this.selectors.linkItem).attr('aria-expanded','true');
+                $dropdown.find('li > a').first().focus();
+            }
+        },
+
+        closeSubDropdown: function() {
+            var $univItems = $(this.selectors.allFirstUniverseItems);
+            $univItems.removeClass(this.classes.subIsOpen);
+            $univItems.find(this.selectors.dropdown).attr('aria-hidden','true');
+            $univItems.children(this.selectors.linkItem).attr('aria-expanded','false');
+        },
+
+        openMobileSearch: function(ev) {
+          var $targ = $(ev.target),
+              $parent = $targ.closest('.polarisSub-search'),
+              $input = $parent.find('.x-field__input');
+
+          $parent.addClass('_showInput');
+          $input.focus();
+        },
+
+        closeMobileSearch: function(ev) {
+          var $targ = $(ev.target),
+              $parent = $targ.closest('.polarisSub-search'),
+              $input = $parent.find('.x-field__input');
+
+          $parent.removeClass('_showInput');
+          $parent.find('.polarisSub-search-btn').focus();
+        },
+
+        languageChange: function(ev) {
+          var url = window.location.href,
+              lang = 'es';
+
+          if( url.indexOf('es.xfinity') > -1 ) {
+            // go to english
+            var split = url.split('es.xfinity'),
+                english = split[0] + 'xfinity' + split[1];
+
+            MP.SrcUrl=english;
+            MP.UrlLang='es';
+            MP.init();
+            MP.switchLanguage(MP.UrlLang==lang?'en':lang);
+            return false;
+          } else {
+            // go to spanish
+            MP.SrcUrl=decodeURIComponent('mp_js_orgin_url');
+            MP.UrlLang='mp_js_current_lang';
+            MP.init();
+            MP.switchLanguage(MP.UrlLang==lang?'en':lang);
+            return false;
+          }
+        },
+
+        handleCartClickEvent: function (ev) {
+          var $cartEl = $('.polarisSub-cart');
+
+          if ($cartEl.is('._itemInCart')) {
+
+            if (this.cartPreviousSession === true) {
+              ev.preventDefault();
+
+              // show learn preloader
+              $(document).trigger('c-preloader-show', { force: true });
+
+              $.ajax({
+                url: this.cartPreviousSessionApi,
+                type: 'GET',
+                success: function(data) {
+                  window.location = data.RedirectUrl
+                }.bind(this),
+                error: function() {
+                  // hide learn preloader
+                  $(document).trigger('c-preloader-hide', { force: true });
+                  console.warn('global nav cart click API call is unavailable');
+                }
+              });
+            }
+
+            return;
+          }
+
+          ev.preventDefault();
+        },
+
+        handleCartStatus: function (data) {
+          var $cartEl = $('.polarisSub-cart');
+
+          if (data.Data === null) {
+            console.warn('global nav cart data is null');
+            $cartEl.removeClass('_itemInCart');
+            return;
+          }
+
+          if (data.Data.CartStatus === true) { // item is in cart
+            $cartEl.addClass('_itemInCart');
+          } else {
+            $cartEl.removeClass('_itemInCart');
+          }
+
+          if (data.Data.IsFromPreviousSession === true) {
+            this.cartPreviousSession = true;
+            this.cartPreviousSessionApi = data.Data.CartUrl;
+          }
+        },
+
+        checkCartStatus: function () {
+          $.ajax({
+            url: '/learn/api/neptune/carts/cartindicator', // prod
+            //url: 'assets/js/mock-cart-response.json', // testing
+            type: 'GET',
+            success: function(data) {
+              this.handleCartStatus(data);
+            }.bind(this),
+            error: function() {
+              console.warn('global nav cart API is unavailable');
+            }
+          });
+        },
+
+        bindListeners: function() {
+            var $doc = $(document);
+            $doc.on('keydown.polaris-nav', this.selectors.navigation, this.handleKeydown.bind(this));
+            $doc.on('click.polaris-nav', '.polaris-nav-header-wrapper', this.handleClicks.bind(this));
+            $doc.on('click.polaris-nav mouseover.polaris-nav', '.polarisSub .polarisSub-content--universe', this.openSubDropdown.bind(this));
+            $doc.on('mouseout.polaris-nav', '.polarisSub .polarisSub-content--universe', this.closeSubDropdown.bind(this));
+            $doc.on('keydown.polaris-nav', '.polarisSub .polarisSub-content--universe', this.handleKeydown.bind(this));
+            $doc.on('keydown.polaris-nav', this.classes.searchBox, this.handleSearch.bind(this));
+            $doc.on('click.polaris-nav', '.polarisSub ' + this.classes.searchButton, this.handleSearch.bind(this));
+            $doc.on('click.polaris-nav', '.polaris-mobile .polarisSub-search-btn', this.openMobileSearch.bind(this));
+            $doc.on('click.polaris-nav', '.polaris-mobile .polarisSub-search-btn-close', this.closeMobileSearch.bind(this));
+            $doc.on('click.polaris-nav', '.polaris-mobile .polarisSub-search._showInput .polarisSub-search-btn', this.handleSearch.bind(this));
+            $doc.on('click.polaris-nav', '.polarisSub-languageChange .polaris-link', this.languageChange.bind(this));
+            $doc.on('click.polaris-nav', '.polarisSub-cart .polaris-link', this.handleCartClickEvent.bind(this));
+
+            setTimeout(function() {
+              this.checkCartStatus();
+            }.bind(this), 200);
+        }
+    };
+    $(document).trigger('polaris-pre-init', fn);
+
+    fn.init();
+
+    $(document).trigger('polaris-post-init', fn);
+});

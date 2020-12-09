@@ -1,0 +1,80 @@
+_satellite.pushAsyncScript(function(event, target, $variables){
+  /* Geo DataCast Integration */
+(function() {
+
+  if(window.location.href.indexOf("idm.xfinity") > -1 || window.location.href.indexOf("comcast.net") > -1 || window.location.href.indexOf("comcast.com") > -1 ) {
+
+    _satellite.notify("Marketing Segment API -> Target Integration Not enabled for this domain");
+    return true;
+
+  }
+  
+  var apiDomain = (window.location.href.indexOf(".int.") > -1) ? "xapi.int.xfinity.com" : "xapi.xfinity.com";
+      
+  AdobeTeamUtils.getAPI("//" + apiDomain + "/personalization/evaluation?tags=tnt-segment", 
+
+    function(data) {
+      _satellite.notify({ "profile" : data.data });
+      var segments = data.data, segmentName = "", segmentID = "";
+      for(var i = 0; i < segments.length; i++) {
+        segmentName += segmentName == "" ? "|" + segments[i].name + "|" : segments[i].name + "|";
+        segmentID += segmentID == "" ? "|" + segments[i].segmentId + "|" : segments[i].segmentId + "|";
+      }
+      if (typeof adobe == "undefined") return; //Continue only on pages where Adobe Target is available.
+      var mboxName = "comcast_markets";
+      adobe.target.trackEvent({
+        mbox: mboxName,
+        params: { "profile.marketing_geosegment_name" : segmentName, "profile.marketing_geosegment_id" : segmentID }
+      });
+      _satellite.notify("Comcast Geo Segment API  -> Target Data Sent!");
+    }, 
+
+    function() {
+      console & console.error("Marketing Segment API Error");
+    }
+
+  );
+})();
+
+
+
+/* DataCast API Integration */
+(function() {
+
+  if(window.location.href.indexOf("idm.xfinity") > -1 || window.location.href.indexOf("comcast.net") > -1 || window.location.href.indexOf("comcast.com") > -1 ) {
+
+    _satellite.notify("DataCast Segment API -> Target Integration Not enabled for this domain");
+    return true;
+
+  }
+  
+  var apiDomain = (window.location.href.indexOf(".int.") > -1) ? "xapi.int.xfinity.com" : "xapi.xfinity.com";
+  var custIDHeader = _satellite.getVar("DataLayer : customerGUID final") != "" ? {"X-User-Personalization" : '{"CustGuid": "' + _satellite.getVar("DataLayer : customerGUID final") + '"}'} : null;
+	
+  AdobeTeamUtils.getAPI("//" + apiDomain + "/personalization/evaluation?tags=tnt-datacast", 
+
+    function(data) {
+      _satellite.notify({ "profile" : data.data });
+      var segments = data.data, segmentName = "", segmentID = "";
+      for(var i = 0; i < segments.length; i++) {
+        segmentName += segmentName == "" ? "|" + segments[i].name + "|" : segments[i].name + "|";
+        segmentID += segmentID == "" ? "|" + segments[i].segmentId + "|" : segments[i].segmentId + "|";
+      }
+      if (typeof adobe == "undefined") return; //Continue only on pages where Adobe Target is available.
+      var mboxName = "comcast_datacast_segments";
+      adobe.target.trackEvent({
+        mbox: mboxName,
+        params: { "profile.datacast_segment_name" : segmentName, "profile.datacast_segment_id" : segmentID }
+      });
+      _satellite.notify("Comcast DataCast Segment API  -> Target Data Sent!");
+    }, 
+
+    function() {
+      console & console.error("DatCast Segment API Error");
+    },
+	
+		custIDHeader
+
+  );
+})();
+});

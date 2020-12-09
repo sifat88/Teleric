@@ -1,0 +1,289 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterIoT.master.cs" Inherits="IoT_MasterIoT" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>.:: Teleric ::.</title>
+
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/formValidation.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/webfont.css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/owl.theme.min.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    </head>
+    <body class="dummy-cls">
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+    <div class="grid_sys hidden" style="background-image:url('#'); position:fixed; left:0;right:0;top:0;bottom:0; width:100%;z-index:999999999999999999999999999999999999999;min-height:1024px; background-position:center center;"></div>
+                <div class="login_pop">
+<div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                         <img src="images/logo/iteleric.png" class="img-responsive" alt="logo"/>
+                    </div>
+                    <div class="modal-body">
+                        <div class="login_sec">
+                            <h3>Login to Teleric</h3>
+                      
+                                <div class="form-group">
+                                    <asp:TextBox ID="TextBox4" runat="server" class="form-control"></asp:TextBox>
+                                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" TargetControlID="TextBox4" WatermarkText="Username or Email"></cc1:TextBoxWatermarkExtender>
+                                 
+                                </div>
+                                <div class="form-group">
+                                      <asp:TextBox ID="TextBox5" runat="server" TextMode="Password" class="form-control"></asp:TextBox>
+                                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender5" runat="server" TargetControlID="TextBox5" WatermarkText="Password"></cc1:TextBoxWatermarkExtender>
+                                 
+                                </div>
+                                <div class="form-group">
+                                       <asp:Button ID="Button2" runat="server" Text="Login"  class="form-control" OnClick="Button2_Click"  />
+                                   
+                                </div>
+                         
+                                <div class="form-group">
+                                    <a href="#" class="go_password">Forgot Your Password?</a>
+                                    <p>Don't have any account? <a href="Register.aspx">Sign Up</a> </p>
+                                </div>
+                           
+                        </div>
+
+
+                        <div class="forgot_sec">
+                            <h3>Forgot your Password</h3>
+                    
+                                <div class="form-group">
+                                  <asp:TextBox ID="TextBox6" runat="server" class="form-control"></asp:TextBox>
+                                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender6" runat="server" TargetControlID="TextBox6" WatermarkText="Username or Email"></cc1:TextBoxWatermarkExtender>
+                                </div>
+
+                                <div class="form-group">
+                                      <asp:Button ID="Button3" runat="server" Text="Login"  class="form-control"  OnClick="btnSubmit_Click" />
+                                </div>
+                                <div class="form-group">
+
+                                    <p>Back to login? <a href="#" class="back_login">Sign Up</a> </p>
+                                </div>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                            <header class="header">
+                                <div class="top-container">
+                                    <div class="header_top">
+                                        <div class="container">
+                                            <ul class="pull-right">
+                                                <li><p class="">Call Us: 630-382-8601</p></li>
+													<li><a href="#" class="search-icon"><i class="ficon dripicons-search"></i></a></li>
+													<li class="search_open_box">
+                                                    <asp:TextBox ID="TextBox11" runat="server"></asp:TextBox>
+                                                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender11" runat="server" TargetControlID="TextBox11" WatermarkText="Search"></cc1:TextBoxWatermarkExtender>
+                                                    <asp:Button ID="Button5" runat="server" Text="Go" />
+                                                 
+                                                </li>
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="navbar-primary affixnav" data-spy="affix" data-offset-top="100">
+                                        <div class="container">
+                                            <div class="navbar-header">
+                                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                                                    <span class="sr-only">Toggle navigation</span>
+                                                    <span class="icon-bar"></span>
+                                                    <span class="icon-bar"></span>
+                                                    <span class="icon-bar"></span>
+                                                </button>
+                                                <div class="logo-image">
+                                                    <a href="#" class="brand js-target-scroll">
+                                                        <img src="images/logo/logo_white.png" alt="logo-image" class="logo-normal" /> <span><span class="bold"></span><span class="bold"></span></span>
+                                               
+                                                    </a>
+
+                                                    <a href="#" class="brand js-target-scroll logo2">
+
+                                                        <img src="images/logo/logo_black.png" alt="logo-image" class="logo-hover" />
+                                                        <span><span class="bold">TELERIC</span><span class="bold"></span></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--login Model-->
+                                            <div class="collapse navbar-collapse" id="navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right underline">
+                             <li><a href="../Default.aspx" class="js-target-scroll">Home</a></li>
+							<li><a href="../Order.aspx" class="js-target-scroll">Order</a></li>
+                            <li><a href="#" class="js-target-scroll" data-toggle="modal" data-target="#myModal">Sign In</a></li>
+							<li><a href="../Support.aspx" class="js-target-scroll">Support</a></li>
+                            <li><a href="Default.aspx" class="js-target-scroll">Residential</a></li>
+                            <li><a href="../Business.aspx" class="js-target-scroll">Business</a></li></ul>
+
+                           	<ul class="nav navbar-nav navbar-right underline menu_2">
+													<li><a href="IoTDefault.aspx" class="js-target-scroll">Automate Home</a></li>        
+													<li><a href="Growth.aspx" class="js-target-scroll">Features</a></li>
+													<li><a href="Insights.aspx" class="js-target-scroll">Hardware</a></li>
+													<a href="javascript:void(0)" class="check_avaliability">Partners</a></ul>
+                                            <div class="check_avaliability_in transition">
+                              <%-- <form >--%>
+                                <div class="col-sm-5 no_padding">
+                                    <label>Street Address</label>
+                                    <asp:TextBox ID="TextBox1" runat="server" class="form-control"></asp:TextBox>
+                                         <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" WatermarkText="Street Address" TargetControlID="TextBox1"></cc1:TextBoxWatermarkExtender>
+                                   <%-- <input class="form-control" placeholder="Street Address" type="text">--%>
+                                </div>
+                                <div class="col-sm-3 no_padding">
+                                    <label>Suite/Apartment</label>
+                                      <asp:TextBox ID="TextBox2" runat="server" class="form-control"></asp:TextBox>
+                                     <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" WatermarkText="Apt/Unit/Suite" TargetControlID="TextBox2"></cc1:TextBoxWatermarkExtender>
+                                  <%--  <input class="form-control" placeholder="Apt/Unit/Suite" type="text">--%>
+                                </div>
+                                <div class="col-sm-2 no_padding">
+                                 
+                                    <label>Zip Code</label>
+                                      <asp:TextBox ID="TextBox3" runat="server" class="form-control"></asp:TextBox>
+                                      <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" WatermarkText="ZipCode" TargetControlID="TextBox3"></cc1:TextBoxWatermarkExtender>
+                                  <%--  <input class="form-control" placeholder="ZipCode" type="text">--%>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>Avalibility</label>
+                                    <asp:Button ID="Button1" runat="server" Text="Submit" class="form-control" />
+                                  <%--  <input class="form-control" value="Submit" type="submit">--%>
+                                </div>
+                         
+                        </div>
+                    </div>
+                        
+                      
+                    </div>
+
+                </div>
+            </div>
+        
+    
+        
+    </header>
+                            <div>
+                                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+                                </asp:ContentPlaceHolder>
+                            </div>
+                                    <section id="footer" class="footer">
+                                <div class="container foote-btm">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 footer-responsive-media">
+                                            <div class="logo-image">
+                                                <a href="#">
+                                                   <img src="images/logo/logo_white.png" alt="logo-image" />
+                                                </a>
+                                            </div>
+                                            <div class="booss-details">
+                                            </div>
+                                            <ul class="quick_links clearfix">
+                                                <li><a href="../Order.aspx">Orders</a></li>
+                                                <li><a href="../Register.aspx">Sign Up</a></li>
+
+
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 footer-responsive-media">
+                                            <h6 class="creative-sub-heading">Quick Links</h6>
+                                            <ul class="quick_links clearfix">
+                                                <li><a href="../Support.aspx">Support</a></li>
+                                                <li><a href="../History.aspx">History</a></li>
+                                                <li><a href="../ContactUs.aspx">Contact Us</a></li>
+                                                <li><a href="../Plans.aspx">Plans</a></li>
+
+                                            </ul>
+
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 footer-responsive-media">
+                                            <h6 class="creative-sub-heading">Quick Links</h6>
+                                            <ul class="quick_links clearfix">
+                                                <li><a href="../FranchiseOpportunities.aspx">Franchise Opportunities</a></li>
+                                                <li><a href="../WhyspeedMatters.aspx">Why Speed Matters</a></li>
+                                                <li><a href="../ExpansionPlans.aspx">Expansion Plans</a></li>
+                                                <li><a href="../Residential.aspx">Residental</a></li>
+                                                <li><a href="../Business.aspx">Business</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                            <h6 class="creative-sub-heading">Quick Links</h6>
+                                            <ul class="quick_links clearfix">
+                                                <li><a href="../CommericalManager.aspx">Commericial Manager</a></li>
+                                                <li><a href="../Blog.aspx">Blog</a></li>
+                                                <li><a href="../WorkforUs.aspx">Work for Us</a></li>
+                                                <li><a href="../PrivacyandTerms.aspx">Privacy & Terms</a></li>
+                                                <li><a href="../Pricing.aspx">Pricing</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="copyright-container">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                                                <p class="copyrights boss-slider-info">&copy; 2017.All rights reserved.</p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="footer-social-icons">
+                                                    <a href="#" class="footer-icon-link facebook"><i class="fa fa-facebook " aria-hidden="true"></i></a>
+                                                    <a href="#" class="footer-icon-link twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                                    <a href="#" class="footer-icon-link google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <script src="js/jquery.min.js"></script>
+                            <script type="text/javascript" src="js/formValidation.min.js"></script>
+                            <script type="text/javascript" src="js/bootstrap.min.js"></script>
+                            <script src="js/wow.min.js"></script>
+                            <script src="js/imagesloaded.pkgd.js"></script>
+                            <script src="js/isotope.pkgd.min.js"></script>
+                            <script type="text/javascript" src="js/packery-mode.pkgd.min.js"></script>
+                            <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+                            <script type="text/javascript" src="js/sliders.js"></script>
+                            <script>
+		                        $(document).ready(function(){
+			                        $('.search-icon').click(function(){
+				                        $('body').toggleClass('search_box')
+				                        $('body').removeClass('check_avaliability_box')
+			                        });
+			                        $('.check_avaliability').click(function(){
+				                        $('body').toggleClass('check_avaliability_box')
+				                        $('body').removeClass('search_box')
+			                        });
+
+			                        $('.go_password').click(function(){
+				                        $('.login_sec').hide();
+				                        $('.forgot_sec').show();
+			                        });
+			                        $('.back_login').click(function(){
+				                        $('.login_sec').show();
+				                        $('.forgot_sec').hide();
+			                        });
+
+		                        });
+                            </script>
+                            </form>
+                        </body>
+                        </html>
