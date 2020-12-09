@@ -971,6 +971,12 @@
     .plan-confirmation {
         top: 208px;
     }
+    .ps-body {
+        background: #ffff;
+        padding: 20px 15px;
+        min-height: 400px;
+        overflow-y: auto;
+    }
   }
   @media only screen and (min-width: 2560px) and (max-width: 3839px){
     .plan-summary, .plan-confirmation{
@@ -980,6 +986,12 @@
     }
     .plan-confirmation {
         top: 208px;
+    }
+    .ps-body {
+        background: #ffff;
+        padding: 20px 15px;
+        min-height: 400px;
+        overflow-y: auto;
     }
   }
   @media only screen and (min-width: 2048px) and (max-width: 2559px){
@@ -991,6 +1003,12 @@
     .plan-confirmation {
         top: 208px;
     }
+    .ps-body {
+        background: #ffff;
+        padding: 20px 15px;
+        min-height: 400px;
+        overflow-y: auto;
+    }
   }
   @media only screen and (min-width: 1920px) and (max-width: 2047px){
     .plan-summary, .plan-confirmation {
@@ -1000,6 +1018,12 @@
     }
     .plan-confirmation {
         top: 208px;
+    }
+    .ps-body {
+        background: #ffff;
+        padding: 20px 15px;
+        min-height: 400px;
+        overflow-y: auto;
     }
 }
   @media only screen and (min-width: 1600px) and (max-width: 1919px){
