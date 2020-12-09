@@ -964,20 +964,35 @@
   }
   @media only screen and (min-width: 3840px){
     .plan-summary, .plan-confirmation{
+        width: 370px;
+        top: 245px;
         right: 35%;
     }
+    .plan-confirmation {
+        top: 208px;
+    }
   }
-  @media only screen and (min-width: 2560px){
+  @media only screen and (min-width: 2560px) and (max-width: 3839px){
     .plan-summary, .plan-confirmation{
+        width: 370px;
+        top: 245px;
         right: 27%;
     }
-  }
-  @media only screen and (min-width: 2048px){
-    .plan-summary, .plan-confirmation{
-        right: 22%;
+    .plan-confirmation {
+        top: 208px;
     }
   }
-  @media only screen and (min-width: 1920px){
+  @media only screen and (min-width: 2048px) and (max-width: 2559px){
+    .plan-summary, .plan-confirmation{
+        width: 370px;
+        top: 245px;
+        right: 22%;
+    }
+    .plan-confirmation {
+        top: 208px;
+    }
+  }
+  @media only screen and (min-width: 1920px) and (max-width: 2047px){
     .plan-summary, .plan-confirmation {
         width: 370px;
         right: 380px;
