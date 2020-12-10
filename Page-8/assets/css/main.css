@@ -1,0 +1,228 @@
+
+/* ----- Some Base Style --------- */
+
+@font-face {
+    font-family: 'XfinityStandard';
+    src: url("https://edge.static-assets.top.comcast.net/staticsites/fonts/latest/Xfinity_Standard/XfinityStandard-Regular.woff2") format("woff2"),
+         url("https://edge.static-assets.top.comcast.net/staticsites/fonts/latest/Xfinity_Standard/XfinityStandard-Regular.woff") format("woff"),
+         url("https://edge.static-assets.top.comcast.net/staticsites/fonts/latest/Xfinity_Standard/XfinityStandard-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  :root{
+      --primary-color: #EEF1F3;
+      --secondary-color: #0272B6;
+  }
+  ul,ol{
+      padding: 0px;
+      margin: 0px;
+      list-style: none;
+  }
+  h1,h2,h3,h4,h5,h6,p,label,ul,ol{
+      margin: 0px;
+      padding: 0px;
+  }
+  body{
+      font-family: "XfinityStandard";
+      background-color: var(--primary-color);
+  }
+  
+  
+  /* +=+=+=+=+=+=+=+=+=++=+=+=+=+=+=+=+=+=++=+=+=+=+=+=+=+=+=+
+      Plan Builder
+  +=+=+=+=+=+=+=+=+=++=+=+=+=+=+=+=+=+=++=+=+=+=+=+=+=+=+=+*/
+  header {
+      background: #0272b6;
+      color: #fff;
+      padding: 20px 0px;
+  }
+  .logo > h1 {
+      text-transform: capitalize;
+      font-size: 35px;
+      font-weight: bold;
+      font-style: italic;
+  }
+  .nav-link {
+      list-style: none;
+      display: flex;
+      justify-content: flex-start;
+  }
+  .nav-link > li > a {
+      color: #fff;
+      margin-right: 20px;
+      font-weight: bold;
+  }
+  main {
+      padding: 50px 0px;
+  }
+  .cmn-checkbox {
+      display: flex;
+      align-items: center;
+  }
+  .cmn-checkbox label {
+      margin-left: 12px;
+      cursor: pointer;
+      font-size: 16px;
+  }
+  .cmn-checkbox input[type="checkbox"] {
+      appearance: none;
+      height: 25px;
+      width: 25px;
+      background-color: var(--primary-color);
+      border: 1px solid #191919;
+      border-radius: 3px;
+      position: relative;
+      cursor: pointer;
+  }
+  .cmn-checkbox .checkbox-input::after {
+      position: absolute;
+      content: "";
+      top: 2px;
+      left: 8px;
+      width: 8px;
+      height: 16px;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(45deg);
+      opacity: 0;
+      visibility: hidden;
+  }
+  .cmn-checkbox .checkbox-input:checked{
+      background-color: var(--secondary-color);
+      border: 1px solid var(--secondary-color);
+      outline: none;
+  }
+  .cmn-checkbox .checkbox-input:checked::after{
+      opacity: 1;
+      visibility: visible;
+  }
+  .cmn-checkbox .checkbox-input:focus{
+      outline: none;
+  }
+  .cmn-footer-cta{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 30px 20px;
+    background: #FBFCFC;
+}
+.cmn-footer-cta .btn {
+    text-transform: capitalize;
+    border: 1px solid #0272b6;
+    color: var(--secondary-color);
+    padding: 10px 25px;
+    border-radius: 30px;
+    background: #fff;
+    width: 140px;
+}
+.cmn-footer-cta .blue-btn {
+    background: var(--secondary-color);
+    color: #fff;
+}
+.cmn-footer-cta .blue-btn a{
+    color: #fff;
+    text-decoration: none;
+}
+
+  /* =======================================================
+      review Order
+  ========================================================== */
+  .plan-tag {
+    background: #000;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 10px;
+    padding: 0px 5px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    line-height: 20px;
+    margin-left : 5px;
+    display: inline-block;
+}
+  .review-order > p {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 40px;
+  }
+  .orderlist-block > p {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+  .orderlist-item {
+    background: #fbfcfc;
+    padding: 20px 20px;
+    border-bottom: 1px solid #dbdbdb;
+}
+.orderlist-item-header {
+    background: #fff;
+    text-transform: capitalize;
+}
+.orderlist-item svg {
+    font-size: 22px;
+    margin-right: 8px;
+}
+.ol-content {
+    display: flex;
+    justify-content: space-between;
+    text-transform: capitalize;
+}
+.ol-helper-list > p {
+    margin: 10px 0px;
+}
+.ol-helper-list ul {
+    margin-top: 10px;
+    list-style-type: square;
+    padding-left: 35px;
+}
+.ol-helper-list a {
+    text-transform: capitalize;
+    display: block;
+    margin: 10px 0px 20px;
+    padding-left: 25px;
+}
+.orderlist-summery {
+    padding: 20px 0px;
+    text-align: right;
+}
+.orderlist-summery a{
+    text-transform: capitalize;
+    font-weight: bold;
+    display: block;
+    margin-top: 8px;
+}
+.tl-border{
+    border-left: 5px solid #0272b6;
+    font-weight: bold;
+}
+.tacb-item {
+    display: flex;
+    align-items: self-start;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+}
+.tacb-item .cmn-checkbox {
+    margin-right: 15px;
+}
+.tacb-item ul {
+    margin-top: 10px;
+    list-style: disc;
+    padding-left: 20px;
+}
+.tacb-item ul li {
+    margin-bottom: 5px;
+}
+.orderlist-item .cmn-footer-cta {
+    background: transparent;
+    justify-content: flex-end;
+    padding: 0px;
+}
+.orderlist-item .cmn-footer-cta .btn {
+    width: 160px;
+    margin-left: 20px;
+}
+.orderlist-footer-summery{
+    text-align: left;
+    font-size: 14px;
+    font-style: italic;
+}
