@@ -165,7 +165,6 @@
 .ol-content {
     display: flex;
     justify-content: space-between;
-    text-transform: capitalize;
 }
 .ol-helper-list > p {
     margin: 10px 0px;
